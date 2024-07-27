@@ -5,7 +5,7 @@ and provides administrators with the ability to manage cities, ticket types, and
 
 ## Features
 1. **Database Design:**
-    - Users (can own multiple cards)
+    - Users (user data)
     - Cards(user cards)
     - Tickets(ticket types)
     - Cities(available cities)
@@ -30,7 +30,7 @@ and provides administrators with the ability to manage cities, ticket types, and
 ## Environment Setup
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/CityCard.git
+   git clone https://github.com/zhenyaAreYouHere63/CityCard.git
    cd CityCard
 2. Install dependencies:
    ```bash
