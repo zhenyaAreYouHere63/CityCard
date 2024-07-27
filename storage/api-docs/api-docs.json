@@ -1,0 +1,301 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CityCard API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/admin/cities": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Get list of cities",
+                "operationId": "getCities",
+                "responses": {
+                    "200": {
+                        "description": "Successful get all cities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/City"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/cities/store": {
+            "post": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Store a new city",
+                "operationId": "storeCity",
+                "responses": {
+                    "201": {
+                        "description": "City created successfully"
+                    }
+                }
+            }
+        },
+        "/admin/cities/update/{city}": {
+            "put": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Update an existing city",
+                "operationId": "updateCity",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "City updated successfully"
+                    }
+                }
+            }
+        },
+        "/admin/cities/destroy/{city}": {
+            "delete": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Delete an existing city",
+                "operationId": "deleteCity",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "City deleted successfully"
+                    }
+                }
+            }
+        },
+        "/admin/tickets": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Get list of tickets",
+                "operationId": "getTickets",
+                "responses": {
+                    "200": {
+                        "description": "Successful get all tickets"
+                    }
+                }
+            }
+        },
+        "/admin/tickets/store": {
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Store a new tickets",
+                "operationId": "storeTicket",
+                "responses": {
+                    "201": {
+                        "description": "Ticket created successfully"
+                    }
+                }
+            }
+        },
+        "/admin/tickets/update/{ticket}": {
+            "put": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Store a new ticket",
+                "operationId": "updateTicket",
+                "parameters": [
+                    {
+                        "name": "ticket",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ticket updated successfully"
+                    }
+                }
+            }
+        },
+        "/admin/cities/destroy/{ticket}": {
+            "delete": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Delete an existing ticket",
+                "operationId": "deleteTicket",
+                "parameters": [
+                    {
+                        "name": "ticket",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ticket deleted successfully"
+                    }
+                }
+            }
+        },
+        "/admin/transports/index": {
+            "get": {
+                "tags": [
+                    "Transports"
+                ],
+                "summary": "Get list of transports",
+                "operationId": "getTransports",
+                "responses": {
+                    "200": {
+                        "description": "Successful get all transports"
+                    }
+                }
+            }
+        },
+        "/admin/transports/store": {
+            "post": {
+                "tags": [
+                    "Transports"
+                ],
+                "summary": "Store a new transport",
+                "operationId": "storeTransport",
+                "responses": {
+                    "201": {
+                        "description": "Transport created successfully"
+                    }
+                }
+            }
+        },
+        "/admin/transports/update/{transport}": {
+            "put": {
+                "tags": [
+                    "Transports"
+                ],
+                "summary": "Store a new transport",
+                "operationId": "updateTransport",
+                "parameters": [
+                    {
+                        "name": "transport",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transport updated successfully"
+                    }
+                }
+            }
+        },
+        "/admin/transports/destroy/{transport}": {
+            "delete": {
+                "tags": [
+                    "Transports"
+                ],
+                "summary": "Delete an existing transport",
+                "operationId": "deleteTransport",
+                "parameters": [
+                    {
+                        "name": "transport",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Transport delete successfully"
+                    }
+                }
+            }
+        },
+        "/user/card": {
+            "get": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Get card details",
+                "operationId": "getDetailsOfCard",
+                "responses": {
+                    "200": {
+                        "description": "Successful get card details"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "City": {
+                "title": "City",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "City ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "City name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cities",
+            "description": "Cities"
+        },
+        {
+            "name": "Tickets",
+            "description": "Tickets"
+        },
+        {
+            "name": "Transports",
+            "description": "Transports"
+        },
+        {
+            "name": "Cards",
+            "description": "Cards"
+        }
+    ]
+}

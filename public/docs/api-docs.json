@@ -1,0 +1,772 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CityCard API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/admin/cities": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Get list of cities",
+                "operationId": "getCities",
+                "responses": {
+                    "200": {
+                        "description": "Successful get all cities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/City"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/cities/store": {
+            "post": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Store a new city",
+                "operationId": "storeCity",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name of the city",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "City created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/City"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/cities/update/{city}": {
+            "patch": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Update an existing city",
+                "operationId": "updateCity",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name of the city",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "City updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/City"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/cities/destroy/{city}": {
+            "delete": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Delete an existing city",
+                "operationId": "deleteCity",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "City deleted successfully"
+                    }
+                }
+            }
+        },
+        "/admin/tickets": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Get list of tickets",
+                "operationId": "getTickets",
+                "responses": {
+                    "200": {
+                        "description": "Successful get all tickets",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Ticket"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/tickets/store": {
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Store a new ticket",
+                "operationId": "storeTicket",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "type",
+                                    "card_id"
+                                ],
+                                "properties": {
+                                    "type": {
+                                        "description": "Ticket type",
+                                        "type": "string"
+                                    },
+                                    "card_id": {
+                                        "description": "ID of the card associated with the ticket",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ticket created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticket"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/tickets/update/{ticket}": {
+            "patch": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Update an existing ticket",
+                "operationId": "updateTicket",
+                "parameters": [
+                    {
+                        "name": "ticket",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "type"
+                                ],
+                                "properties": {
+                                    "type": {
+                                        "description": "Ticket type",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ticket updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticket"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/cities/destroy/{ticket}": {
+            "delete": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Delete an existing ticket",
+                "operationId": "deleteTicket",
+                "parameters": [
+                    {
+                        "name": "ticket",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "City deleted successfully"
+                    }
+                }
+            }
+        },
+        "/admin/transports": {
+            "get": {
+                "tags": [
+                    "Transports"
+                ],
+                "summary": "Get list of transports",
+                "operationId": "getTransports",
+                "responses": {
+                    "200": {
+                        "description": "Successful get all transports",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Transport"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/transports/store": {
+            "post": {
+                "tags": [
+                    "Transports"
+                ],
+                "summary": "Store a new transport",
+                "operationId": "storeTransport",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "price",
+                                    "cities_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name of the transport",
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "description": "Price of transport services",
+                                        "type": "integer"
+                                    },
+                                    "cities_id": {
+                                        "description": "Id of the city associated with the transport",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transport created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Transport"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/transports/update/{transport}": {
+            "patch": {
+                "tags": [
+                    "Transports"
+                ],
+                "summary": "Update an existing transport",
+                "operationId": "updateTransport",
+                "parameters": [
+                    {
+                        "name": "transport",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name of the transport",
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "description": "Price of transport services",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Transport updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Transport"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/transports/destroy/{transport}": {
+            "delete": {
+                "tags": [
+                    "Transports"
+                ],
+                "summary": "Delete an existing transport",
+                "operationId": "deleteTransport",
+                "parameters": [
+                    {
+                        "name": "transport",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Transport delete successfully"
+                    }
+                }
+            }
+        },
+        "/user/card": {
+            "get": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Get card details",
+                "operationId": "getDetailsOfCard",
+                "parameters": [
+                    {
+                        "name": "cardId",
+                        "in": "query",
+                        "description": "ID of the card to retrieve details for",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful get card details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "card": {
+                                            "properties": {
+                                                "number": {
+                                                    "type": "string"
+                                                },
+                                                "balance": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
+                                                "tickets": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer"
+                                                            },
+                                                            "tripHistory": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "$ref": "#/components/schemas/TripHistory"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "topUpHistory": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TopUpHistory"
+                                            }
+                                        },
+                                        "costHistory": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CostHistory"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Card not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Card not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "City": {
+                "title": "City",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "City ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "City name",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Timestamp when the city was created",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Timestamp when the city was updated",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Ticket": {
+                "title": "Ticket",
+                "required": [
+                    "id",
+                    "card_id",
+                    "type"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Ticket ID",
+                        "type": "integer"
+                    },
+                    "card_id": {
+                        "description": "ID of the card associated with the ticket",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "description": "Ticket type",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Timestamp when the ticket was created",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Timestamp when the ticket was updated",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Transport": {
+                "title": "Transport",
+                "required": [
+                    "id",
+                    "cities_id",
+                    "name",
+                    "price"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Ticket ID",
+                        "type": "integer"
+                    },
+                    "cities_id": {
+                        "description": "ID of the city associated with the transport",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Transport name",
+                        "type": "string"
+                    },
+                    "price": {
+                        "description": "Price of transport services",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "created_at": {
+                        "description": "Timestamp when the ticket was created",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Timestamp when the ticket was updated",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "TripHistory": {
+                "title": "TripHistory",
+                "required": [
+                    "id",
+                    "ticket_id",
+                    "route",
+                    "date"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Ticket ID",
+                        "type": "integer"
+                    },
+                    "ticket_id": {
+                        "description": "ID of the ticket associated with the TripHistory",
+                        "type": "integer"
+                    },
+                    "route": {
+                        "description": "route",
+                        "type": "string"
+                    },
+                    "date": {
+                        "description": "Start of the route",
+                        "type": "date-time"
+                    },
+                    "created_at": {
+                        "description": "Timestamp when the ticket was created",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Timestamp when the ticket was updated",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "CostHistory": {
+                "title": "CostHistory",
+                "required": [
+                    "id",
+                    "card_id",
+                    "expense",
+                    "date"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Ticket ID",
+                        "type": "integer"
+                    },
+                    "card_id": {
+                        "description": "ID of the card associated with the CostHistory",
+                        "type": "integer"
+                    },
+                    "expense": {
+                        "description": "expense",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "date": {
+                        "description": "expense",
+                        "type": "date-time"
+                    },
+                    "created_at": {
+                        "description": "Timestamp when the ticket was created",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Timestamp when the ticket was updated",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "TopUpHistory": {
+                "title": "TopUpHistory",
+                "required": [
+                    "id",
+                    "card_id",
+                    "replenishment",
+                    "date"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Ticket ID",
+                        "type": "integer"
+                    },
+                    "card_id": {
+                        "description": "ID of the card associated with the TopUpHistory",
+                        "type": "integer"
+                    },
+                    "replenishment": {
+                        "description": "replenishment",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "date": {
+                        "description": "topUp",
+                        "type": "date-time"
+                    },
+                    "created_at": {
+                        "description": "Timestamp when the ticket was created",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Timestamp when the ticket was updated",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cities",
+            "description": "Cities"
+        },
+        {
+            "name": "Tickets",
+            "description": "Tickets"
+        },
+        {
+            "name": "Transports",
+            "description": "Transports"
+        },
+        {
+            "name": "Cards",
+            "description": "Cards"
+        }
+    ]
+}
