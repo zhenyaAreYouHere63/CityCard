@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\city\StoreCityRequest;
 use App\Http\Requests\city\UpdateCityRequest;
 use App\Models\City;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
-class CityController extends Controller
+class AdminCityController extends Controller
 {
     /**
      * @OA\Get(
@@ -25,13 +28,14 @@ class CityController extends Controller
      *      )
      *   )
      */
-    public function index()
+    public function index(): View
     {
-        $cities = City::all();
+        $cities = City::paginate(10);
+
         return view('admin.cities.index', compact('cities'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('admin.cities.create');
     }
@@ -63,14 +67,14 @@ class CityController extends Controller
      *     )
      * )
      */
-    public function store(StoreCityRequest $request)
+    public function store(StoreCityRequest $request): RedirectResponse
     {
         City::create($request->validated());
 
         return redirect()->route('admin.cities.index');
     }
 
-    public function edit(City $city)
+    public function edit(City $city): View
     {
         return view('admin.cities.edit', compact('city'));
     }
@@ -108,7 +112,7 @@ class CityController extends Controller
      *     )
      * )
      */
-    public function update(UpdateCityRequest $request, City $city)
+    public function update(UpdateCityRequest $request, City $city): RedirectResponse
     {
         $city->update($request->validated());
 
@@ -134,7 +138,7 @@ class CityController extends Controller
      *   )
      * )
      */
-    public function destroy(City $city)
+    public function destroy(City $city): RedirectResponse
     {
         $city->delete();
 

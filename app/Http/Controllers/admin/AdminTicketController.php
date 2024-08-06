@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ticket\StoreTicketRequest;
 use App\Http\Requests\ticket\UpdateTicketRequest;
 use App\Models\Card;
 use App\Models\Ticket;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
-class TicketController extends Controller
+class AdminTicketController extends Controller
 {
     /**
      * @OA\Get(
@@ -25,15 +28,17 @@ class TicketController extends Controller
      *    )
      * )
      */
-    public function index()
+    public function index(): View
     {
-        $tickets = Ticket::all();
+        $tickets = Ticket::paginate(10);
+
         return view('admin.tickets.index', compact('tickets'));
     }
 
-    public function create()
+    public function create(): View
     {
         $cards = Card::all();
+
         return view('admin.tickets.create', compact('cards'));
     }
 
@@ -69,14 +74,14 @@ class TicketController extends Controller
      *     )
      * )
      */
-    public function store(StoreTicketRequest $request)
+    public function store(StoreTicketRequest $request): RedirectResponse
     {
         Ticket::create($request->validated());
 
         return redirect()->route('admin.tickets.index');
     }
 
-    public function edit(Ticket $ticket)
+    public function edit(Ticket $ticket): View
     {
         return view('admin.tickets.edit', compact('ticket'));
     }
@@ -114,7 +119,7 @@ class TicketController extends Controller
      *     )
      * )
      */
-    public function update(UpdateTicketRequest $request, Ticket $ticket)
+    public function update(UpdateTicketRequest $request, Ticket $ticket): RedirectResponse
     {
         $ticket->update($request->validated());
 
@@ -140,7 +145,7 @@ class TicketController extends Controller
      *    )
      *  )
      */
-    public function destroy(Ticket $ticket)
+    public function destroy(Ticket $ticket): RedirectResponse
     {
         $ticket->delete();
 

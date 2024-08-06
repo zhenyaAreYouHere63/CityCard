@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Card extends Model
 {
@@ -11,22 +13,22 @@ class Card extends Model
     protected $table = 'cards';
     protected $fillable = ['name', 'user_id', 'number', 'balance'];
 
-    public function tickets()
+    public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'card_id');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'card_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function topUpHistory()
+    public function topUpHistory(): HasMany
     {
         return $this->hasMany(TopUpHistory::class, 'card_id');
     }
 
-    public function costHistory()
+    public function costHistory(): HasMany
     {
         return $this->hasMany(CostHistory::class, 'card_id');
     }

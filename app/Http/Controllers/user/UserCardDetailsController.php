@@ -7,8 +7,9 @@ use App\Models\Card;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-class UserController extends Controller
+class UserCardDetailsController extends Controller
 {
     /**
      * @OA\Get(
@@ -59,33 +60,43 @@ class UserController extends Controller
      *             ),
      *         )
      *     ),
-     *    @OA\Response(
-     *    response=200,
-     *    description="Successful get all data with card",
-     *     )
      * )
      */
-    public function showCardDetails(Request $request)
+    public function showCardDetails(Request $request): View
     {
         $user = Auth::user();
         $cardId = $request->input('cardId');
 
-        try {
-            $card = Card::with(['tickets.tripHistory', 'topUpHistory',
-                'costHistory'])
-                ->where('number', $cardId)
-                ->where('user_id', $user->id)
-                ->firstOrFail();
-        } catch (ModelNotFoundException $e) {
-            return response(['message' => 'Card not found'], 404);
+        $card = $this->getCard($cardId, $user->id);
+
+        $data = $this->prepareCardData($card);
+
+        return view('user.functional.card-details', $data);
+    }
+
+    private function getCard(string $cardId, int $userId): Card
+    {
+        $card = Card::with(['tickets.tripHistory', 'topUpHistory',
+        'costHistory'])
+        ->where('number', $cardId)
+        ->where('user_id', $userId)
+        ->firstOrFail();
+
+        if (!$card) {
+            abort(404, 'Card not found');
         }
 
-        $balance = $card->balance;
-        $tripHistory = $card->tickets->flatMap->tripHistory;
-        $topUpHistory = $card->topUpHistory;
-        $costHistory = $card->costHistory;
+        return $card;
+    }
 
-        return view('user.functional.card-details', compact('card',
-            'balance', 'tripHistory', 'topUpHistory', 'costHistory'));
+    private function prepareCardData(Card $card): array
+    {
+        return [
+            'card' => $card,
+            'balance' => $card->balance,
+            'tripHistory' => $card->tickets->flatMap->tripHistory,
+            'topUpHistory' => $card->topUpHistory,
+            'costHistory' => $card->costHistory,
+        ];
     }
 }

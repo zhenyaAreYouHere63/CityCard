@@ -22,6 +22,7 @@
             </form>
         </li>
     @endforeach
+    {{ $cities->links() }}
 </ul>
 </body>
 </html>

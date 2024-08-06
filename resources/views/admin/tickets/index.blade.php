@@ -22,6 +22,7 @@
             </form>
         </li>
     @endforeach
+    {{ $tickets->links() }}
 </ul>
 </body>
 </html>

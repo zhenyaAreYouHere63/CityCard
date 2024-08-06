@@ -510,22 +510,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Card not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Card not found"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
                     }
                 }
             }

@@ -18,3 +18,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Ignore PHP-CS-Fixer cache file
+.php-cs-fixer.cache
+

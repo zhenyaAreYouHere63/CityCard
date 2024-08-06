@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Http\Requests\ticket\StoreTicketRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\transport\StoreTransportRequest;
 use App\Http\Requests\transport\UpdateTransportRequest;
 use App\Models\City;
 use App\Models\Transport;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
-class TransportController extends Controller
+class AdminTransportController extends Controller
 {
     /**
      * @OA\Get(
@@ -27,15 +29,17 @@ class TransportController extends Controller
      *   )
      * )
      */
-    public function index()
+    public function index(): View
     {
-        $transports = Transport::all();
+        $transports = Transport::paginate(10);
+
         return view('admin.transports.index', compact('transports'));
     }
 
-    public function create()
+    public function create(): View
     {
         $cities = City::all();
+
         return view('admin.transports.create', compact('cities'));
     }
 
@@ -76,14 +80,14 @@ class TransportController extends Controller
      *     )
      * )
      */
-    public function store(StoreTransportRequest $request)
+    public function store(StoreTransportRequest $request): RedirectResponse
     {
         Transport::create($request->validated());
 
         return redirect()->route('admin.transports.index');
     }
 
-    public function edit(Transport $transport)
+    public function edit(Transport $transport): View
     {
         return view('admin.transports.edit', compact('transport'));
     }
@@ -126,7 +130,7 @@ class TransportController extends Controller
      *     )
      * )
      */
-    public function update(UpdateTransportRequest $request, Transport $transport)
+    public function update(UpdateTransportRequest $request, Transport $transport): RedirectResponse
     {
         $transport->update($request->validated());
 
@@ -152,7 +156,7 @@ class TransportController extends Controller
      *   )
      * )
      */
-    public function destroy(Transport $transport)
+    public function destroy(Transport $transport): RedirectResponse
     {
         $transport->delete();
 

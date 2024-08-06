@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\AdminCityController;
 use App\Http\Controllers\admin\AdminDashboardController;
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\login\LoginController;
-use App\Http\Controllers\TicketController;
-use App\Http\Controllers\TransportController;
-use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\admin\AdminTicketController;
+use App\Http\Controllers\admin\AdminTransportController;
+use App\Http\Controllers\login\AdminLoginController;
+use App\Http\Controllers\login\UserLoginController;
+use App\Http\Controllers\user\UserCardDetailsController;
 use App\Http\Controllers\user\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,15 +14,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [LoginController::class, 'showUserLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'userLogin']);
+Route::get('/login', [UserLoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserLoginController::class, 'login']);
 
-Route::get('/admin/login', [LoginController::class, 'showAdminLoginForm'])->name('admin.login');
-Route::post('/admin/login', [LoginController::class, 'adminLogin']);
+Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminLoginController::class, 'login']);
 
 Route::middleware(['auth:users', 'role:user'])->group(function () {
     Route::get('user/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
-    Route::get('user/card', [UserController::class, 'showCardDetails'])
+    Route::get('user/card', [UserCardDetailsController::class, 'showCardDetails'])
         ->middleware('retrieveCardId')
         ->name('user.card');
 });
@@ -29,7 +30,7 @@ Route::middleware(['auth:users', 'role:user'])->group(function () {
 Route::middleware(['auth:admins', 'role:admin'])->group(function () {
     Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
-    Route::resource('admin/cities', CityController::class)->names([
+    Route::resource('admin/cities', AdminCityController::class)->names([
         'index' => 'admin.cities.index',
         'create' => 'admin.cities.create',
         'store' => 'admin.cities.store',
@@ -38,7 +39,7 @@ Route::middleware(['auth:admins', 'role:admin'])->group(function () {
         'destroy' => 'admin.cities.destroy',
     ]);
 
-    Route::resource('admin/transports', TransportController::class)->names([
+    Route::resource('admin/transports', AdminTransportController::class)->names([
         'index' => 'admin.transports.index',
         'create' => 'admin.transports.create',
         'store' => 'admin.transports.store',
@@ -47,7 +48,7 @@ Route::middleware(['auth:admins', 'role:admin'])->group(function () {
         'destroy' => 'admin.transports.destroy',
     ]);
 
-    Route::resource('admin/tickets', TicketController::class)->names([
+    Route::resource('admin/tickets', AdminTicketController::class)->names([
         'index' => 'admin.tickets.index',
         'create' => 'admin.tickets.create',
         'store' => 'admin.tickets.store',
@@ -58,5 +59,5 @@ Route::middleware(['auth:admins', 'role:admin'])->group(function () {
 });
 
 Route::get('/api/docs', function () {
-    return redirect('/docs');
+    return redirect('/api/documentation');
 });

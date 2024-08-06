@@ -227,5 +227,4 @@ namespace App\Http\Controllers\api;
  */
 class ApiDocumentation
 {
-
 }

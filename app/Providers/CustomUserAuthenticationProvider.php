@@ -15,7 +15,7 @@ class CustomUserAuthenticationProvider implements UserProvider
         $this->model = $model;
     }
 
-    public function retrieveByCredentials(array $credentials)
+    public function retrieveByCredentials(array $credentials): ?Authenticatable
     {
         if (empty($credentials['number'])
             || empty($credentials['phone_number'])) {
@@ -33,7 +33,7 @@ class CustomUserAuthenticationProvider implements UserProvider
             ->first();
     }
 
-    public function retrieveById($identifier)
+    public function retrieveById($identifier): ?Authenticatable
     {
         return $this->model::find($identifier);
     }

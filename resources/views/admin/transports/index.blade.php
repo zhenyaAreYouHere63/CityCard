@@ -22,6 +22,7 @@
             </form>
         </li>
     @endforeach
+    {{ $transports->links() }}
 </ul>
 </body>
 </html>

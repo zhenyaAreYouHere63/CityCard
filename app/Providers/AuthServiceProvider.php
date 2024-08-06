@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
-
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -28,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Auth::provider('custom', function ($app, array $config) {
             $model = $config['model'];
+
             return new CustomUserAuthenticationProvider($model);
         });
     }
