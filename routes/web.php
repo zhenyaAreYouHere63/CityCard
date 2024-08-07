@@ -20,14 +20,14 @@ Route::post('/login', [UserLoginController::class, 'login']);
 Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminLoginController::class, 'login']);
 
-Route::middleware(['auth:users', 'role:user'])->group(function () {
+Route::middleware(['auth:users'])->group(function () {
     Route::get('user/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('user/card', [UserCardDetailsController::class, 'showCardDetails'])
         ->middleware('retrieveCardId')
         ->name('user.card');
 });
 
-Route::middleware(['auth:admins', 'role:admin'])->group(function () {
+Route::middleware(['auth:admins'])->group(function () {
     Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::resource('admin/cities', AdminCityController::class)->names([

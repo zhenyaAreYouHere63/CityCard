@@ -5,15 +5,17 @@ namespace App\Http\Controllers\login;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class UserLoginController extends Controller
 {
-    public function showLoginForm()
+    public function showLoginForm(): View
     {
         return view('auth.user_login');
     }
 
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $guard = 'users';
 
