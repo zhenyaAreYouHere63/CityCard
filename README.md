@@ -6,6 +6,7 @@ and provides administrators with the ability to manage cities, ticket types, and
 ## Features
 1. **Database Design:**
     - Users (user data)
+    - Admins (admins data)
     - Cards(user cards)
     - Tickets(ticket types)
     - Cities(available cities)
