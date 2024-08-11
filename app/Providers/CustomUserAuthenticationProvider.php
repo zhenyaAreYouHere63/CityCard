@@ -17,8 +17,10 @@ class CustomUserAuthenticationProvider implements UserProvider
 
     public function retrieveByCredentials(array $credentials): ?Authenticatable
     {
-        if (empty($credentials['number'])
-            || empty($credentials['phone_number'])) {
+        if (
+            empty($credentials['number'])
+            || empty($credentials['phone_number'])
+        ) {
             return null;
         }
 
@@ -38,23 +40,32 @@ class CustomUserAuthenticationProvider implements UserProvider
         return $this->model::find($identifier);
     }
 
-    public function retrieveByToken($identifier, #[\SensitiveParameter] $token)
-    {
+    public function retrieveByToken(
+        $identifier,
+        #[\SensitiveParameter] $token
+    ) {
         // TODO: Implement retrieveByToken() method.
     }
 
-    public function updateRememberToken(Authenticatable $user, #[\SensitiveParameter] $token)
-    {
+    public function updateRememberToken(
+        Authenticatable $user,
+        #[\SensitiveParameter] $token
+    ) {
         // TODO: Implement updateRememberToken() method.
     }
 
-    public function validateCredentials(Authenticatable $user, #[\SensitiveParameter] array $credentials)
-    {
+    public function validateCredentials(
+        Authenticatable $user,
+        #[\SensitiveParameter] array $credentials
+    ) {
         return true;
     }
 
-    public function rehashPasswordIfRequired(Authenticatable $user, #[\SensitiveParameter] array $credentials, bool $force = false)
-    {
+    public function rehashPasswordIfRequired(
+        Authenticatable $user,
+        #[\SensitiveParameter] array $credentials,
+        bool $force = false
+    ) {
         // TODO: Implement rehashPasswordIfRequired() method.
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TopUpHistory extends Model
 {
     use HasFactory;
+
     protected $table = 'top_up_histories';
     protected $fillable = ['card_id', 'replenishment', 'date'];
 

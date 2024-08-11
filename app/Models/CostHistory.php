@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class CostHistory extends Model
 {
     use HasFactory;
+
     protected $table = "cost_histories";
     protected $fillable = ['card_id', 'expense', 'date'];
 

@@ -22,7 +22,7 @@ class UserLoginController extends Controller
         $credentials = $request->only('number', 'phone_number');
         $number = $request->input('number');
 
-        if(Auth::guard($guard)->attempt($credentials)) {
+        if (Auth::guard($guard)->attempt($credentials)) {
             $request->session()->put('cardId', $number);
             return redirect()->intended('user/dashboard');
         }

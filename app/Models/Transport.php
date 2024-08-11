@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Transport extends Model
 {
     use HasFactory;
+
     protected $table = 'transports';
     protected $fillable = ['name', 'price', 'cities_id'];
 

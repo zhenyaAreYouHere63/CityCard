@@ -17,7 +17,7 @@ class RetrieveCardId
     {
         $cardId = $request->session()->get('cardId');
 
-        if($cardId) {
+        if ($cardId) {
             $request->merge(['cardId' => $cardId]);
         }
 
